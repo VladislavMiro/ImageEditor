@@ -23,7 +23,6 @@ struct SignUpView: View {
                 TextField("Email", text: $viewModel.email)
                     .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                     .keyboardType(.emailAddress)
-                    .textInputAutocapitalization(.never)
                     .textContentType(.emailAddress)
                 
                 if !viewModel.isValidEmail {
@@ -35,7 +34,6 @@ struct SignUpView: View {
                 SecureField("Password", text: $viewModel.password)
                     .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
                     .keyboardType(.default)
-                    .textInputAutocapitalization(.never)
                     .textContentType(.newPassword)
                 
                 if !viewModel.isValidPassword {

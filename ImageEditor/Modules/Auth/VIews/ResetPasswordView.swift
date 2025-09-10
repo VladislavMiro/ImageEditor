@@ -22,7 +22,6 @@ struct ResetPasswordView: View {
                 TextField("Email", text: $viewModel.email)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
-                    .textInputAutocapitalization(.never)
                     .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                     
                 if !viewModel.isValidEmail {

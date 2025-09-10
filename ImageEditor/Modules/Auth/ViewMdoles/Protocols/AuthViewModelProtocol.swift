@@ -15,7 +15,7 @@ protocol AuthViewModelProtocol: AnyObject, ObservableObject {
     var isValidEmail: Bool { get }
     var isValidPassword: Bool { get }
     
-    func login(email: String, password: String)
+    func signIn(completion: @escaping () -> Void)
     func signUp(completion: @escaping () -> Void)
     func resetPassword(completion: @escaping () -> Void)
 }

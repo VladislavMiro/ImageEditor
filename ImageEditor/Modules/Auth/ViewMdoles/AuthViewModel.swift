@@ -27,8 +27,26 @@ final class AuthViewModel {
 
 extension AuthViewModel: AuthViewModelProtocol {
     
-    func login(email: String, password: String) {
+    func signIn(completion: @escaping () -> Void) {
+        isValidEmail = checkEmail(email)
         
+        guard isValidEmail else { return }
+        
+        isLoading = true
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [unowned self] result, error in
+            isLoading = false
+            
+            if let error = error {
+                errorMessage = error.localizedDescription
+                isError = true
+                
+                return
+            }
+            
+            user = result?.user
+            completion()
+        }
     }
     
     func signUp(completion: @escaping () -> Void) {

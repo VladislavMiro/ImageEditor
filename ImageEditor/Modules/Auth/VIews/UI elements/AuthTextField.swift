@@ -19,6 +19,7 @@ struct AuthTextField: ViewModifier {
         content
             .padding()
             .frame(maxWidth: .infinity, maxHeight: 50)
+            .textInputAutocapitalization(.never)
             .overlay(content: {
                 RoundedRectangle(cornerRadius: 16)
                     .strokeBorder(isValid ? Color.black : Color.red)

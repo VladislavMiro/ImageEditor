@@ -10,6 +10,7 @@ import SwiftUI
 struct SignInView: View {
     
     @State private var isForgotPassword: Bool = false
+    @State private var toMainView: Bool = false
     @State private var path = NavigationPath()
     @StateObject private var viewModel = AuthViewModel()
     
@@ -20,30 +21,47 @@ struct SignInView: View {
                 .foregroundStyle(Color.blue)
                 .padding(.top, -80)
             
-            VStack(alignment: .trailing) {
+            VStack(alignment: .leading) {
+                
                 TextField(text: $viewModel.email, label: {
                     Text("Email")
                 })
                 .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                 .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
                 
-                SecureField("Password", text: $viewModel.password)
-                    .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
-                    .keyboardType(.default)
-                
-                Button {
-                    isForgotPassword.toggle()
-                } label: {
-                    Text("Forgot password")
+                if !viewModel.isValidEmail {
+                    Text("Email is not valid")
+                        .foregroundStyle(Color.red)
+                        .padding(.leading, 16)
                 }
-                .padding(.horizontal, 16)
+                
+                VStack(alignment: .trailing) {
+                    SecureField("Password", text: $viewModel.password)
+                        .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
+                        .keyboardType(.default)
+                        .textContentType(.password)
+                    
+                    Button {
+                        isForgotPassword.toggle()
+                    } label: {
+                        Text("Forgot password")
+                    }
+                    .padding(.horizontal, 16)
+                }
             }
             .padding(.horizontal, 20)
-            .padding(.bottom, 15)
+            
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding(.vertical, 20)
+            }
             
             VStack(alignment: .leading, spacing: 10) {
                 Button {
-                    
+                    viewModel.signIn {
+                        toMainView.toggle()
+                    }
                 } label: {
                     Text("Sign In")
                 }
@@ -57,6 +75,11 @@ struct SignInView: View {
                 .padding(.leading, 16)
             }
             .padding(.horizontal, 20)
+            .alert("Error", isPresented:  $viewModel.isError, actions: {
+                Button("OK") {}
+            }, message: {
+                Text(viewModel.errorMessage)
+            })
             .navigationDestination(for: RoutingPaths.self) { path in
                 switch path {
                 case .SignUpView:
@@ -66,6 +89,8 @@ struct SignInView: View {
             }.sheet(isPresented: $isForgotPassword) {
                 ResetPasswordView()
                     .environmentObject(viewModel)
+            }.fullScreenCover(isPresented: $toMainView) {
+                ContentView()
             }
         }
     }
