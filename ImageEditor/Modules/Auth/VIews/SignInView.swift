@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
+import FirebaseCore
+import FirebaseAuth
 
 struct SignInView: View {
     
@@ -19,7 +23,7 @@ struct SignInView: View {
             Text("Sign In")
                 .font(.system(.largeTitle, weight: .bold))
                 .foregroundStyle(Color.blue)
-                .padding(.top, -80)
+                .padding(.bottom, 80)
             
             VStack(alignment: .leading) {
                 
@@ -51,10 +55,11 @@ struct SignInView: View {
                 }
             }
             .padding(.horizontal, 20)
+            .padding(.bottom, 20)
             
             if viewModel.isLoading {
                 ProgressView()
-                    .padding(.vertical, 20)
+                    .padding(.bottom, 20)
             }
             
             VStack(alignment: .leading, spacing: 10) {
@@ -73,6 +78,19 @@ struct SignInView: View {
                     NavigationLink("Sign Up", value: RoutingPaths.SignUpView)
                 }
                 .padding(.leading, 16)
+                
+                VStack(alignment: .center) {
+                    Text("Or")
+                    
+                    GoogleSignInButton(style: .wide) {
+
+                        viewModel.signInWithGoogle() {
+                            toMainView.toggle()
+                        }
+                        
+                    }
+                }
+                
             }
             .padding(.horizontal, 20)
             .alert("Error", isPresented:  $viewModel.isError, actions: {

@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import FirebaseAuth
 import FirebaseCore
+import GoogleSignIn
 
 final class AuthViewModel {
     
@@ -47,6 +48,60 @@ extension AuthViewModel: AuthViewModelProtocol {
             user = result?.user
             completion()
         }
+    }
+    
+    func signInWithGoogle(completion: @escaping () -> Void) {
+        guard let clientID = FirebaseApp.app()?.options.clientID
+        else {
+            errorMessage = "Firebase client ID is empty."
+            isError = true
+            return
+        }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.configuration = config
+        
+        guard let windowScnene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScnene.windows.first,
+              let vc = window.rootViewController
+        else {
+            fatalError("Root view controller not found")
+        }
+        
+        isLoading = true
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: vc) { [unowned self] result, error in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+            }
+            
+            guard let user = result?.user, let token = user.idToken?.tokenString
+            else {
+                isLoading = false
+                errorMessage = "Google token is empty."
+                isError = true
+                
+                return
+            }
+            
+            let credentials = GoogleAuthProvider.credential(withIDToken: token, accessToken: user.accessToken.tokenString)
+            
+            Auth.auth().signIn(with: credentials) { [unowned self] result, error in
+                isLoading = false
+                
+                if let error = error {
+                    errorMessage = error.localizedDescription
+                    isError = true
+                    
+                    return
+                }
+                
+                self.user = result?.user
+                completion()
+            }
+        }
+        
     }
     
     func signUp(completion: @escaping () -> Void) {
