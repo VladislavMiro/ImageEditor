@@ -54,6 +54,27 @@ extension AuthViewModel: AuthViewModelProtocol {
         }
     }
     
+    func resetPassword(completion: @escaping () -> Void) {
+        isValidEmail = checkEmail(email)
+        
+        guard isValidEmail else { return }
+        
+        isLoading = true
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { [unowned self] error in
+            isLoading = false
+            
+            if let error = error {
+                errorMessage = error.localizedDescription
+                isError = true
+                
+                return
+            }
+            
+            completion()
+        }
+    }
+    
 }
 
 //MARK: - Extension with private methods
