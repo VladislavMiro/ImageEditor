@@ -21,6 +21,7 @@
 		D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD752E71AD250067D599 /* AuthRouter.swift */; };
 		D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */; };
 		D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */; };
+		D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		D36EBD752E71AD250067D599 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
+		D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				D36EBD6E2E719EDE0067D599 /* UI elements */,
 				D36EBD6C2E7199660067D599 /* SignInView.swift */,
 				D36EBD732E71A8620067D599 /* SignUpView.swift */,
+				D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */,
 				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
 				D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */,
+				D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
 				D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */,
 				D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */,

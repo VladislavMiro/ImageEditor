@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State private var isSignUpShow: Bool = false
+    @State private var isForgotPassword: Bool = false
     @State private var path = NavigationPath()
     @StateObject private var viewModel = AuthViewModel()
     
@@ -32,10 +32,11 @@ struct SignInView: View {
                     .keyboardType(.default)
                 
                 Button {
-                    
+                    isForgotPassword.toggle()
                 } label: {
                     Text("Forgot password")
-                }.padding(.horizontal, 16)
+                }
+                .padding(.horizontal, 16)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 15)
@@ -61,9 +62,10 @@ struct SignInView: View {
                 case .SignUpView:
                     SignUpView(path: $path)
                         .environmentObject(viewModel)
-                case .RestoreAccountView:
-                    EmptyView()
                 }
+            }.sheet(isPresented: $isForgotPassword) {
+                ResetPasswordView()
+                    .environmentObject(viewModel)
             }
         }
     }
@@ -75,7 +77,6 @@ private extension SignInView {
     
     enum RoutingPaths: Hashable {
         case SignUpView
-        case RestoreAccountView
     }
     
 }

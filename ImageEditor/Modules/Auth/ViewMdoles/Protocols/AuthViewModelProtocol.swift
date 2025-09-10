@@ -8,7 +8,6 @@
 import Foundation
 
 protocol AuthViewModelProtocol: AnyObject, ObservableObject {
-    
     var email: String { get }
     var password: String { get }
     var errorMessage: String { get }
