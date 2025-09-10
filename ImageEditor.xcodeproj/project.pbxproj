@@ -17,6 +17,8 @@
 		D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6C2E7199660067D599 /* SignInView.swift */; };
 		D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6F2E719EF40067D599 /* AuthButton.swift */; };
 		D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD712E71A4000067D599 /* AuthTextField.swift */; };
+		D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD732E71A8620067D599 /* SignUpView.swift */; };
+		D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD752E71AD250067D599 /* AuthRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		D36EBD6C2E7199660067D599 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		D36EBD6F2E719EF40067D599 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		D36EBD712E71A4000067D599 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		D36EBD732E71A8620067D599 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		D36EBD752E71AD250067D599 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 			children = (
 				D36EBD6E2E719EDE0067D599 /* UI elements */,
 				D36EBD6C2E7199660067D599 /* SignInView.swift */,
+				D36EBD732E71A8620067D599 /* SignUpView.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 		D36EBD6A2E7199390067D599 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D36EBD752E71AD250067D599 /* AuthRouter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,8 +234,10 @@
 				D36EBD662E71968B0067D599 /* AppDelegate.swift in Sources */,
 				D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */,
 				D36EBD582E7194440067D599 /* ContentView.swift in Sources */,
+				D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */,
 				D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */,
 				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
+				D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
