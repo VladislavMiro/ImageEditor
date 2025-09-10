@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State private var email: String = ""
-    @State private var password: String = ""
     @State private var isSignUpShow: Bool = false
     @State private var path = NavigationPath()
+    @StateObject private var viewModel = AuthViewModel()
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -22,14 +21,14 @@ struct SignInView: View {
                 .padding(.top, -80)
             
             VStack(alignment: .trailing) {
-                TextField(text: $email, label: {
+                TextField(text: $viewModel.email, label: {
                     Text("Email")
                 })
-                .modifier(AuthTextField())
+                .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                 .keyboardType(.emailAddress)
                 
-                SecureField("Password", text: $password)
-                    .modifier(AuthTextField())
+                SecureField("Password", text: $viewModel.password)
+                    .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
                     .keyboardType(.default)
                 
                 Button {
@@ -61,6 +60,7 @@ struct SignInView: View {
                 switch path {
                 case .SignUpView:
                     SignUpView(path: $path)
+                        .environmentObject(viewModel)
                 case .RestoreAccountView:
                     EmptyView()
                 }

@@ -9,13 +9,19 @@ import SwiftUI
 
 struct AuthTextField: ViewModifier {
     
+    @Binding private var isValid: Bool
+    
+    init(isValid: Binding<Bool>) {
+        self._isValid = isValid
+    }
+    
     func body(content: Content) -> some View {
         content
             .padding()
             .frame(maxWidth: .infinity, maxHeight: 50)
             .overlay(content: {
                 RoundedRectangle(cornerRadius: 16)
-                    .strokeBorder(Color.black)
+                    .strokeBorder(isValid ? Color.black : Color.red)
             })
     }
     

@@ -19,6 +19,8 @@
 		D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD712E71A4000067D599 /* AuthTextField.swift */; };
 		D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD732E71A8620067D599 /* SignUpView.swift */; };
 		D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD752E71AD250067D599 /* AuthRouter.swift */; };
+		D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */; };
+		D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		D36EBD712E71A4000067D599 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		D36EBD732E71A8620067D599 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D36EBD752E71AD250067D599 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				D36EBD6B2E71993E0067D599 /* Protocols */,
+				D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */,
 			);
 			path = ViewMdoles;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 		D36EBD6B2E71993E0067D599 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -239,6 +245,8 @@
 				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
 				D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
+				D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */,
+				D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

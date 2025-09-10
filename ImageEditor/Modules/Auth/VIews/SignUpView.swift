@@ -8,32 +8,71 @@
 import SwiftUI
 
 struct SignUpView: View {
-    
-    @State private var email: String = ""
-    @State private var password: String = ""
+
     @Binding var path: NavigationPath
+    @EnvironmentObject private var viewModel: AuthViewModel
     
     var body: some View {
-        Text("Sign Up")
-            .font(.system(.largeTitle, weight: .bold))
-            .foregroundStyle(Color.blue)
-            .padding(.top, -80)
-        
         VStack {
-            TextField("Email", text: $email)
-                .modifier(AuthTextField())
+            Text("Sign Up")
+                .font(.system(.largeTitle, weight: .bold))
+                .foregroundStyle(Color.blue)
+                .padding(.top, -80)
             
-            SecureField("Password", text: $password)
-                .modifier(AuthTextField())
+            VStack(alignment: .leading) {
+                TextField("Email", text: $viewModel.email)
+                    .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
+                    .keyboardType(.emailAddress)
+                    .textInputAutocapitalization(.never)
+                    .textContentType(.emailAddress)
+                
+                if !viewModel.isValidEmail {
+                    Text("Email is not valid")
+                        .foregroundStyle(Color.red)
+                        .padding(.leading, 16)
+                }
+                
+                SecureField("Password", text: $viewModel.password)
+                    .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
+                    .keyboardType(.default)
+                    .textInputAutocapitalization(.never)
+                    .textContentType(.newPassword)
+                
+                if !viewModel.isValidPassword {
+                    Text("Minimum 8 characters at least 1 Alphabet and 1 Number")
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(Color.red)
+                        .padding(.leading, 20)
+                }
+                
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
+            
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding(.bottom, 20)
+            }
+            
+            Button("Sign Up") {
+                viewModel.signUp() {
+                    path.removeLast()
+                }
+            }
+            .modifier(AuthButton())
+            .padding(.horizontal, 20)
+            .alert("Error", isPresented: $viewModel.isError, actions: {
+                Button("OK") {
+                    
+                }
+            }, message: {
+                Text(viewModel.errorMessage)
+            })
+        }.onAppear {
+            viewModel.email = ""
+            viewModel.password = ""
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 20)
-        
-        Button("Sign Up") {
-            path.removeLast()
-        }
-        .modifier(AuthButton())
-        .padding(.horizontal, 20)
     }
 }
 
