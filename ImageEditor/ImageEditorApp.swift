@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 @main
 struct ImageEditorApp: App {
@@ -14,7 +15,11 @@ struct ImageEditorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            if Auth.auth().currentUser != nil {
+                ContentView()
+            } else {
+                SignInView()
+            }
         }
     }
 }

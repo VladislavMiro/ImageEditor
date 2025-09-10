@@ -17,7 +17,7 @@ struct SignUpView: View {
             Text("Sign Up")
                 .font(.system(.largeTitle, weight: .bold))
                 .foregroundStyle(Color.blue)
-                .padding(.top, -80)
+                .padding(.bottom, 80)
             
             VStack(alignment: .leading) {
                 TextField("Email", text: $viewModel.email)

@@ -20,7 +20,6 @@ final class AuthViewModel {
     @Published var isValidEmail: Bool = true
     @Published var isValidPassword: Bool = true
     @Published var isLoading: Bool = false
-    @Published var user: User?
     
 }
 
@@ -45,7 +44,6 @@ extension AuthViewModel: AuthViewModelProtocol {
                 return
             }
             
-            user = result?.user
             completion()
         }
     }
@@ -97,7 +95,6 @@ extension AuthViewModel: AuthViewModelProtocol {
                     return
                 }
                 
-                self.user = result?.user
                 completion()
             }
         }
@@ -118,12 +115,12 @@ extension AuthViewModel: AuthViewModelProtocol {
             if let error = error {
                 errorMessage = error.localizedDescription
                 isError = true
-            } else {
-                
-                user = result?.user
-                
-                completion()
+                return
             }
+                
+            Auth.auth().currentUser?.sendEmailVerification()
+                
+            completion()
         }
     }
     
