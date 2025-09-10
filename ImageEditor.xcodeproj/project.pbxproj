@@ -14,6 +14,9 @@
 		D36EBD622E7195B10067D599 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD612E7195B10067D599 /* FirebaseAuth */; };
 		D36EBD642E7195B10067D599 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD632E7195B10067D599 /* FirebaseCore */; };
 		D36EBD662E71968B0067D599 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD652E71968B0067D599 /* AppDelegate.swift */; };
+		D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6C2E7199660067D599 /* SignInView.swift */; };
+		D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6F2E719EF40067D599 /* AuthButton.swift */; };
+		D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD712E71A4000067D599 /* AuthTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		D36EBD562E7194440067D599 /* ImageEditorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorApp.swift; sourceTree = "<group>"; };
 		D36EBD5B2E7195120067D599 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D36EBD652E71968B0067D599 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D36EBD6C2E7199660067D599 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		D36EBD6F2E719EF40067D599 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		D36EBD712E71A4000067D599 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +92,59 @@
 		D36EBD5F2E71952B0067D599 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D36EBD672E71991E0067D599 /* Auth */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		D36EBD672E71991E0067D599 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D36EBD6A2E7199390067D599 /* Models */,
+				D36EBD692E7199310067D599 /* ViewMdoles */,
+				D36EBD682E71992D0067D599 /* VIews */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		D36EBD682E71992D0067D599 /* VIews */ = {
+			isa = PBXGroup;
+			children = (
+				D36EBD6E2E719EDE0067D599 /* UI elements */,
+				D36EBD6C2E7199660067D599 /* SignInView.swift */,
+			);
+			path = VIews;
+			sourceTree = "<group>";
+		};
+		D36EBD692E7199310067D599 /* ViewMdoles */ = {
+			isa = PBXGroup;
+			children = (
+				D36EBD6B2E71993E0067D599 /* Protocols */,
+			);
+			path = ViewMdoles;
+			sourceTree = "<group>";
+		};
+		D36EBD6A2E7199390067D599 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D36EBD6B2E71993E0067D599 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D36EBD6E2E719EDE0067D599 /* UI elements */ = {
+			isa = PBXGroup;
+			children = (
+				D36EBD6F2E719EF40067D599 /* AuthButton.swift */,
+				D36EBD712E71A4000067D599 /* AuthTextField.swift */,
+			);
+			path = "UI elements";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,7 +226,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D36EBD662E71968B0067D599 /* AppDelegate.swift in Sources */,
+				D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */,
 				D36EBD582E7194440067D599 /* ContentView.swift in Sources */,
+				D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */,
+				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
