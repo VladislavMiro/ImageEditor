@@ -10,71 +10,71 @@ import SwiftUI
 struct SignUpView: View {
 
     @Binding var path: NavigationPath
-    @EnvironmentObject private var viewModel: AuthViewModel
+    @StateObject private var viewModel = SignUpViewModel()
     
     var body: some View {
         VStack {
             Text("Sign Up")
                 .font(.system(.largeTitle, weight: .bold))
                 .foregroundStyle(Color.blue)
-                .padding(.bottom, 80)
+                .padding(.vertical, 80)
             
-            VStack(alignment: .leading) {
-                TextField("Email", text: $viewModel.email)
-                    .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                
-                if !viewModel.isValidEmail {
-                    Text("Email is not valid")
-                        .foregroundStyle(Color.red)
-                        .padding(.leading, 16)
-                }
-                
-                SecureField("Password", text: $viewModel.password)
-                    .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
-                    .keyboardType(.default)
-                    .textContentType(.newPassword)
-                
-                if !viewModel.isValidPassword {
-                    Text("Minimum 8 characters at least 1 Alphabet and 1 Number")
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                        .foregroundStyle(Color.red)
-                        .padding(.leading, 20)
-                }
-                
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            textFields
+                .padding(.horizontal, 20)
             
-            if viewModel.isLoading {
-                ProgressView()
-                    .padding(.bottom, 20)
-            }
+            ProgressView()
+                .padding(.bottom, 10)
+                .opacity(viewModel.isLoading ? 1 : 0)
             
             Button("Sign Up") {
-                viewModel.signUp() {
-                    path.removeLast()
-                }
+                viewModel.signUp()
             }
             .modifier(AuthButton())
             .padding(.horizontal, 20)
-            .alert("Error", isPresented: $viewModel.isError, actions: {
-                Button("OK") {
-                    
-                }
-            }, message: {
-                Text(viewModel.errorMessage)
-            })
-        }.onAppear {
-            viewModel.email = ""
-            viewModel.password = ""
+            
+            Spacer()
+        }
+        .alert("Error", isPresented: $viewModel.isError, actions: {
+            Button("OK") { }
+        }, message: {
+            Text(viewModel.errorMessage)
+        })
+        .onChange(of: viewModel.isSignedUp) { isSignedUp in
+            if isSignedUp {
+                path.removeLast()
+            }
+        }
+        
+    }
+    
+    private var textFields: some View {
+        VStack(alignment: .leading) {
+            TextField("Email", text: $viewModel.email)
+                .modifier(AuthTextField(isValid: $viewModel.isEmailValid))
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+
+            Text("Email is not valid")
+                .foregroundStyle(Color.red)
+                .padding(.leading, 16)
+                .opacity(viewModel.isEmailValid ? 0 : 1)
+            
+            SecureField("Password", text: $viewModel.password)
+                .modifier(AuthTextField(isValid: $viewModel.isPasswordValid))
+                .keyboardType(.default)
+                .textContentType(.newPassword)
+            
+            Text("Minimum 8 characters at least 1 Alphabet and 1 Number")
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(Color.red)
+                .padding(.leading, 16)
+                .opacity(viewModel.isPasswordValid ? 0 : 1)
         }
     }
 }
 
 #Preview {
     let path = NavigationPath()
+    
     SignUpView(path: .constant(path))
 }

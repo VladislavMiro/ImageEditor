@@ -101,29 +101,6 @@ extension AuthViewModel: AuthViewModelProtocol {
         
     }
     
-    func signUp(completion: @escaping () -> Void) {
-        isValidEmail = checkEmail(email)
-        isValidPassword = checkdPassword(password)
-        
-        guard isValidEmail && isValidPassword else { return  }
-        
-        isLoading = true
-        
-        Auth.auth().createUser(withEmail: email, password: password) { [unowned self] result, error in
-            isLoading = false
-            
-            if let error = error {
-                errorMessage = error.localizedDescription
-                isError = true
-            } else {
-                
-                Auth.auth().currentUser?.sendEmailVerification()
-                
-                completion()
-            }
-        }
-    }
-    
 }
 
 //MARK: - Extension with private methods

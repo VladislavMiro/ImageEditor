@@ -16,5 +16,4 @@ protocol AuthViewModelProtocol: AnyObject, ObservableObject {
     var isValidPassword: Bool { get }
     
     func signIn(completion: @escaping () -> Void)
-    func signUp(completion: @escaping () -> Void)
 }
