@@ -15,11 +15,11 @@ struct ImageEditorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if Auth.auth().currentUser != nil {
-                ContentView()
-            } else {
+            //if Auth.auth().currentUser != nil {
+              //  ContentView()
+            //} else {
                 SignInView()
-            }
+            //}
         }
     }
 }

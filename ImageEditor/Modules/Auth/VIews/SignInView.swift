@@ -106,7 +106,7 @@ struct SignInView: View {
                 }
             }.sheet(isPresented: $isForgotPassword) {
                 ResetPasswordView()
-                    .environmentObject(viewModel)
+                    .presentationDragIndicator(.visible)
             }.fullScreenCover(isPresented: $toMainView) {
                 ContentView()
             }

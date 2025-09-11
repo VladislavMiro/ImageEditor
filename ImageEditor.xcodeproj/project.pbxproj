@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D32F875C2E72BF04006EE811 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */; };
+		D32F875E2E72C12C006EE811 /* CredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F875D2E72C12C006EE811 /* CredentialsValidator.swift */; };
+		D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87602E72C14B006EE811 /* CredentialsValidatorProtocol.swift */; };
+		D32F87632E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87622E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift */; };
 		D36EBD582E7194440067D599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD552E7194440067D599 /* ContentView.swift */; };
 		D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD562E7194440067D599 /* ImageEditorApp.swift */; };
 		D36EBD5A2E7194440067D599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36EBD542E7194440067D599 /* Assets.xcassets */; };
@@ -18,16 +22,18 @@
 		D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6F2E719EF40067D599 /* AuthButton.swift */; };
 		D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD712E71A4000067D599 /* AuthTextField.swift */; };
 		D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD732E71A8620067D599 /* SignUpView.swift */; };
-		D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD752E71AD250067D599 /* AuthRouter.swift */; };
 		D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */; };
 		D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */; };
 		D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */; };
 		D36EBD7F2E71E0570067D599 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD7E2E71E0570067D599 /* GoogleSignIn */; };
 		D36EBD812E71E0570067D599 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD802E71E0570067D599 /* GoogleSignInSwift */; };
-		D36EBD842E71E8D30067D599 /* GoogleSignInViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD832E71E8D30067D599 /* GoogleSignInViewProxy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		D32F875D2E72C12C006EE811 /* CredentialsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsValidator.swift; sourceTree = "<group>"; };
+		D32F87602E72C14B006EE811 /* CredentialsValidatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsValidatorProtocol.swift; sourceTree = "<group>"; };
+		D32F87622E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModelProtocol.swift; sourceTree = "<group>"; };
 		D36EBD462E71943A0067D599 /* ImageEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36EBD542E7194440067D599 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D36EBD552E7194440067D599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,12 +44,10 @@
 		D36EBD6F2E719EF40067D599 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		D36EBD712E71A4000067D599 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		D36EBD732E71A8620067D599 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		D36EBD752E71AD250067D599 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
 		D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D36EBD822E71E1460067D599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D36EBD832E71E8D30067D599 /* GoogleSignInViewProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewProxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D32F875F2E72C135006EE811 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D32F87602E72C14B006EE811 /* CredentialsValidatorProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D36EBD3D2E71943A0067D599 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +153,7 @@
 			children = (
 				D36EBD6B2E71993E0067D599 /* Protocols */,
 				D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */,
+				D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */,
 			);
 			path = ViewMdoles;
 			sourceTree = "<group>";
@@ -148,8 +161,8 @@
 		D36EBD6A2E7199390067D599 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D36EBD752E71AD250067D599 /* AuthRouter.swift */,
-				D36EBD832E71E8D30067D599 /* GoogleSignInViewProxy.swift */,
+				D32F875F2E72C135006EE811 /* Protocols */,
+				D32F875D2E72C12C006EE811 /* CredentialsValidator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */,
+				D32F87622E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -252,16 +266,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D36EBD842E71E8D30067D599 /* GoogleSignInViewProxy.swift in Sources */,
 				D36EBD662E71968B0067D599 /* AppDelegate.swift in Sources */,
 				D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */,
 				D36EBD582E7194440067D599 /* ContentView.swift in Sources */,
 				D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */,
 				D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */,
 				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
-				D36EBD762E71AD250067D599 /* AuthRouter.swift in Sources */,
 				D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */,
+				D32F87632E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift in Sources */,
+				D32F875C2E72BF04006EE811 /* ResetPasswordViewModel.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
+				D32F875E2E72C12C006EE811 /* CredentialsValidator.swift in Sources */,
+				D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */,
 				D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */,
 				D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */,
 			);

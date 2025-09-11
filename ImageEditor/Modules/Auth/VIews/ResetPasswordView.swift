@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ResetPasswordView: View {
     
-    @EnvironmentObject private var viewModel: AuthViewModel
-    @State private var passwordIsReset: Bool = false
+    @StateObject private var viewModel = ResetPasswordViewModel()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
             Text("Enter your email to reset password.")
-                .padding(.bottom, 80)
+                .padding(.vertical, 80)
             
             VStack(alignment: .leading) {
                 TextField("Email", text: $viewModel.email)
@@ -24,32 +23,28 @@ struct ResetPasswordView: View {
                     .textContentType(.emailAddress)
                     .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                     
-                if !viewModel.isValidEmail {
-                    Text("Email is not valid")
-                        .foregroundStyle(Color.red)
-                        .padding(.leading, 16)
-                }
+                Text("Email is not valid")
+                    .foregroundStyle(Color.red)
+                    .padding(.leading, 16)
+                    .opacity(viewModel.isValidEmail ? 0 : 1)
             }
             .padding(.horizontal, 20)
-            .padding(.bottom, 40)
+            .padding(.bottom, 20)
             
-            if viewModel.isLoading {
-                ProgressView()
-                    .padding(.bottom, 20)
-            }
+            ProgressView()
+                .padding(.bottom, 20)
+                .opacity(viewModel.isLoading ? 1 : 0)
             
             Button {
-                viewModel.resetPassword {
-                    passwordIsReset.toggle()
-                }
+                viewModel.resetPassword()
             } label: {
                 Text("Reset password")
             }
             .modifier(AuthButton())
             .padding(.horizontal, 20)
-            
+            Spacer()
         }
-        .alert("Password reset", isPresented: $passwordIsReset, actions: {
+        .alert("Password reset", isPresented: $viewModel.isPassworReset, actions: {
             Button("OK") {
                 dismiss()
             }
@@ -57,16 +52,11 @@ struct ResetPasswordView: View {
             Text("An email has been sent to reset your password.")
         })
         .alert("Error", isPresented: $viewModel.isError, actions: {
-            Button("OK") {
-                
-            }
+            Button("OK") {}
         }, message: {
             Text(viewModel.errorMessage)
         })
-        .onAppear {
-            viewModel.email = ""
-            viewModel.password = ""
-        }
+        
     }
 }
 
