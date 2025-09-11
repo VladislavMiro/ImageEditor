@@ -62,5 +62,4 @@ struct ResetPasswordView: View {
 
 #Preview {
     ResetPasswordView()
-        .environmentObject(AuthViewModel())
 }

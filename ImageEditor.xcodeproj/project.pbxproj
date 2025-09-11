@@ -24,8 +24,8 @@
 		D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD6F2E719EF40067D599 /* AuthButton.swift */; };
 		D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD712E71A4000067D599 /* AuthTextField.swift */; };
 		D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD732E71A8620067D599 /* SignUpView.swift */; };
-		D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */; };
-		D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */; };
+		D36EBD782E71B4AD0067D599 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD772E71B4AD0067D599 /* SignInViewModel.swift */; };
+		D36EBD7A2E71B4BC0067D599 /* SignInViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD792E71B4BC0067D599 /* SignInViewModelProtocol.swift */; };
 		D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */; };
 		D36EBD7F2E71E0570067D599 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD7E2E71E0570067D599 /* GoogleSignIn */; };
 		D36EBD812E71E0570067D599 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD802E71E0570067D599 /* GoogleSignInSwift */; };
@@ -48,8 +48,8 @@
 		D36EBD6F2E719EF40067D599 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		D36EBD712E71A4000067D599 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		D36EBD732E71A8620067D599 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
+		D36EBD772E71B4AD0067D599 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		D36EBD792E71B4BC0067D599 /* SignInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelProtocol.swift; sourceTree = "<group>"; };
 		D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D36EBD822E71E1460067D599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				D36EBD6B2E71993E0067D599 /* Protocols */,
-				D36EBD772E71B4AD0067D599 /* AuthViewModel.swift */,
+				D36EBD772E71B4AD0067D599 /* SignInViewModel.swift */,
 				D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */,
 				D32F87642E72D0BA006EE811 /* SignUpViewModel.swift */,
 			);
@@ -175,7 +175,7 @@
 		D36EBD6B2E71993E0067D599 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				D36EBD792E71B4BC0067D599 /* AuthViewModelProtocol.swift */,
+				D36EBD792E71B4BC0067D599 /* SignInViewModelProtocol.swift */,
 				D32F87622E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift */,
 				D32F87662E72D37B006EE811 /* SignUpViewModelProtocol.swift */,
 			);
@@ -286,8 +286,8 @@
 				D32F875E2E72C12C006EE811 /* CredentialsValidator.swift in Sources */,
 				D32F87672E72D37B006EE811 /* SignUpViewModelProtocol.swift in Sources */,
 				D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */,
-				D36EBD7A2E71B4BC0067D599 /* AuthViewModelProtocol.swift in Sources */,
-				D36EBD782E71B4AD0067D599 /* AuthViewModel.swift in Sources */,
+				D36EBD7A2E71B4BC0067D599 /* SignInViewModelProtocol.swift in Sources */,
+				D36EBD782E71B4AD0067D599 /* SignInViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

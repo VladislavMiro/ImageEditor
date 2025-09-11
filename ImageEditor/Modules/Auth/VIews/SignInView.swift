@@ -8,91 +8,34 @@
 import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
-import FirebaseCore
-import FirebaseAuth
 
 struct SignInView: View {
     
     @State private var isForgotPassword: Bool = false
-    @State private var toMainView: Bool = false
     @State private var path = NavigationPath()
-    @StateObject private var viewModel = AuthViewModel()
+    @StateObject private var viewModel = SignInViewModel()
     
     var body: some View {
         NavigationStack(path: $path) {
-            Text("Sign In")
-                .font(.system(.largeTitle, weight: .bold))
-                .foregroundStyle(Color.blue)
-                .padding(.bottom, 80)
-            
-            VStack(alignment: .leading) {
+            VStack {
+                Text("Sign In")
+                    .font(.system(.largeTitle, weight: .bold))
+                    .foregroundStyle(Color.blue)
+                    .padding(.vertical, 80)
                 
-                TextField(text: $viewModel.email, label: {
-                    Text("Email")
-                })
-                .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
-                .keyboardType(.emailAddress)
-                .textContentType(.emailAddress)
+                textFields
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
                 
-                if !viewModel.isValidEmail {
-                    Text("Email is not valid")
-                        .foregroundStyle(Color.red)
-                        .padding(.leading, 16)
-                }
-                
-                VStack(alignment: .trailing) {
-                    SecureField("Password", text: $viewModel.password)
-                        .modifier(AuthTextField(isValid: $viewModel.isValidPassword))
-                        .keyboardType(.default)
-                        .textContentType(.password)
-                    
-                    Button {
-                        isForgotPassword.toggle()
-                    } label: {
-                        Text("Forgot password")
-                    }
-                    .padding(.horizontal, 16)
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
-            
-            if viewModel.isLoading {
                 ProgressView()
                     .padding(.bottom, 20)
+                    .opacity(viewModel.isLoading ? 1 : 0)
+                
+                buttons
+                    .padding(.horizontal, 20)
+                
+                Spacer()
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Button {
-                    viewModel.signIn {
-                        toMainView.toggle()
-                    }
-                } label: {
-                    Text("Sign In")
-                }
-                .modifier(AuthButton())
-                
-                HStack(spacing: 1) {
-                    Text("Don't have an account? ")
-                    
-                    NavigationLink("Sign Up", value: RoutingPaths.SignUpView)
-                }
-                .padding(.leading, 16)
-                
-                VStack(alignment: .center) {
-                    Text("Or")
-                    
-                    GoogleSignInButton(style: .wide) {
-
-                        viewModel.signInWithGoogle() {
-                            toMainView.toggle()
-                        }
-                        
-                    }
-                }
-                
-            }
-            .padding(.horizontal, 20)
             .alert("Error", isPresented:  $viewModel.isError, actions: {
                 Button("OK") {}
             }, message: {
@@ -107,11 +50,68 @@ struct SignInView: View {
             }.sheet(isPresented: $isForgotPassword) {
                 ResetPasswordView()
                     .presentationDragIndicator(.visible)
-            }.fullScreenCover(isPresented: $toMainView) {
+            }.fullScreenCover(isPresented: $viewModel.isSignedIn) {
                 ContentView()
             }
         }
     }
+    
+    private var textFields: some View {
+        VStack(alignment: .leading) {
+            TextField(text: $viewModel.email, label: {
+                Text("Email")
+            })
+            .modifier(AuthTextField(isValid: $viewModel.isEmailValid))
+            .keyboardType(.emailAddress)
+            .textContentType(.emailAddress)
+
+            Text("Email is not valid")
+                .foregroundStyle(Color.red)
+                .padding(.leading, 16)
+                .opacity(viewModel.isEmailValid ? 0 : 1)
+            
+            VStack(alignment: .trailing) {
+                SecureField("Password", text: $viewModel.password)
+                    .modifier(AuthTextField(isValid: .constant(true)))
+                    .keyboardType(.default)
+                    .textContentType(.password)
+                
+                Button {
+                    isForgotPassword.toggle()
+                } label: {
+                    Text("Forgot password")
+                }
+                .padding(.horizontal, 16)
+            }
+        }
+    }
+    
+    private var buttons: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button {
+                viewModel.signIn()
+            } label: {
+                Text("Sign In")
+            }
+            .modifier(AuthButton())
+            
+            HStack(spacing: 1) {
+                Text("Don't have an account? ")
+                
+                NavigationLink("Sign Up", value: RoutingPaths.SignUpView)
+            }
+            .padding(.leading, 16)
+            
+            VStack(alignment: .center) {
+                Text("Or")
+                
+                GoogleSignInButton(style: .wide) {
+                    viewModel.signInWithGoogle()
+                }
+            }
+        }
+    }
+    
 }
 
 //MARK: - Extension with private subobjects
