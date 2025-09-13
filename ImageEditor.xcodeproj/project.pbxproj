@@ -44,6 +44,7 @@
 		D3C525292E75DDF70091BDAB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C525282E75DDF70091BDAB /* MainView.swift */; };
 		D3C5252B2E75E3200091BDAB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C5252A2E75E3200091BDAB /* MainViewModel.swift */; };
 		D3C5252F2E7602370091BDAB /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C5252E2E7602370091BDAB /* MainViewCell.swift */; };
+		D3C525322E761C140091BDAB /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C525312E761C140091BDAB /* MainViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		D3C525282E75DDF70091BDAB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D3C5252A2E75E3200091BDAB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D3C5252E2E7602370091BDAB /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		D3C525312E761C140091BDAB /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,9 +321,18 @@
 		D3C525262E75DDE00091BDAB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D3C525302E761B440091BDAB /* Protocols */,
 				D3C5252A2E75E3200091BDAB /* MainViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D3C525302E761B440091BDAB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D3C525312E761C140091BDAB /* MainViewModelProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +441,7 @@
 				D3C5252F2E7602370091BDAB /* MainViewCell.swift in Sources */,
 				D31B53192E733BD700559575 /* CameraView.swift in Sources */,
 				D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */,
+				D3C525322E761C140091BDAB /* MainViewModelProtocol.swift in Sources */,
 				D31B530F2E7304F600559575 /* ImageEditorViewModel.swift in Sources */,
 				D3C525222E75D9580091BDAB /* UserText.swift in Sources */,
 				D36EBD7A2E71B4BC0067D599 /* SignInViewModelProtocol.swift in Sources */,

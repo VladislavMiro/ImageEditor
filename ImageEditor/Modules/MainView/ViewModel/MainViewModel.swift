@@ -11,10 +11,6 @@ import FirebaseCore
 import GoogleSignIn
 import Photos
 
-protocol MainViewModelProtocol: AnyObject, ObservableObject {
-    
-}
-
 final class MainViewModel {
     
     @Published var photos: PHFetchResult<PHAsset> = .init()
@@ -22,7 +18,6 @@ final class MainViewModel {
     @Published var isSignOut: Bool = false
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
-    @Published var user = Auth.auth().currentUser
     @Published var selectedImage: UIImage?
     
 }
@@ -44,13 +39,15 @@ extension MainViewModel: MainViewModelProtocol {
     }
     
     func fetchPhotos() {
-        Task(priority: .userInitiated) {
+        Task.detached(priority: .userInitiated) { [unowned self] in
             let res = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
             
             if res == .authorized {
                 let fetchOptions = PHFetchOptions()
                 
-                isAuthorized = true
+                await MainActor.run {
+                    isAuthorized = true
+                }
                 
                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                 
@@ -58,7 +55,9 @@ extension MainViewModel: MainViewModelProtocol {
                     photos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
                 }
             } else {
-                isAuthorized = false
+                await MainActor.run {
+                    isAuthorized = false
+                }
             }
         }
         
