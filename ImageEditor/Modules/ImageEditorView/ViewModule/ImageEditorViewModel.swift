@@ -17,6 +17,10 @@ final class ImageEditorViewModel: ObservableObject {
     
     var originalImage: UIImage?
     
+    init(image: UIImage? = nil, originalImage: UIImage? = nil) {
+        self.image = image
+    }
+    
 }
 
 //MARK: - Extension with ImageEditorViewModelProtocol implementation

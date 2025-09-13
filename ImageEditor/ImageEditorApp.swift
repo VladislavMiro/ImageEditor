@@ -16,7 +16,7 @@ struct ImageEditorApp: App {
     var body: some Scene {
         WindowGroup {
             if Auth.auth().currentUser != nil {
-                ImageEditorView()
+                MainView()
             } else {
                 SignInView()
             }

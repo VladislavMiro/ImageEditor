@@ -11,12 +11,10 @@ import PencilKit
 
 struct ImageEditorView: View {
     
-    @StateObject private var viewModel = ImageEditorViewModel()
+    @EnvironmentObject private var viewModel: ImageEditorViewModel
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var pickerItem: PhotosPickerItem?
-    @State private var isCameraOpened: Bool = false
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
     @State private var drawing = PKDrawing()
@@ -34,27 +32,7 @@ struct ImageEditorView: View {
     
     var body: some View {
         NavigationStack {
-            
-            if viewModel.image == nil {
-                selectPhotoView
-            } else {
                 imageEditor
-            }
-            
-        }
-        .fullScreenCover(isPresented: $isCameraOpened) {
-            CameraView(isPresent: $isCameraOpened, image: $viewModel.image)
-                .ignoresSafeArea()
-        }
-        .onChange(of: pickerItem) { pickerItem in
-            Task {
-                if let image = try? await pickerItem?.loadTransferable(type: Data.self) {
-                    viewModel.image = UIImage(data: image)
-                    viewModel.originalImage = UIImage(data: image)
-                } else {
-                    debugPrint("ddd")
-                }
-            }
         }
         .onChange(of: selectedTab) { selectedTab in
             selectedTabDidChanged(selectedTab)
@@ -122,7 +100,7 @@ struct ImageEditorView: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    
+                    dismiss()
                 } label: {
                     Text("Cancel")
                         .foregroundColor(.white)
@@ -195,35 +173,7 @@ struct ImageEditorView: View {
     }
     
     private var selectPhotoView: some View {
-        VStack(spacing: 16) {
-            
-            PhotosPicker(selection: $pickerItem, matching: .images, preferredItemEncoding: .current) {
-                HStack {
-                    Image(systemName: "photo.on.rectangle.angled")
-                    Text("Choose a photo")
-                    Spacer()
-                }.padding()
-            }
-            .modifier(PhotoButton())
-            
-            Button {
-                isCameraOpened = true
-            } label: {
-                HStack {
-                    Image(systemName: "camera")
-                    Text("Take a photo")
-                    Spacer()
-                }.padding()
-            }
-            .modifier(PhotoButton())
-            
-            
-            
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Editor")
+        return EmptyView()
     }
     
 }
