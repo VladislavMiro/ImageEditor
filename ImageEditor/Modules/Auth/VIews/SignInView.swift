@@ -36,6 +36,7 @@ struct SignInView: View {
                 
                 Spacer()
             }
+            .background(Color.white)
             .alert("Error", isPresented:  $viewModel.isError, actions: {
                 Button("OK") {}
             }, message: {
@@ -53,6 +54,7 @@ struct SignInView: View {
             }.fullScreenCover(isPresented: $viewModel.isSignedIn) {
                 MainView()
             }
+            .ignoresSafeArea(.keyboard)
         }
     }
     
@@ -60,6 +62,7 @@ struct SignInView: View {
         VStack(alignment: .leading) {
             TextField(text: $viewModel.email, label: {
                 Text("Email")
+                    .foregroundStyle(Color.gray)
             })
             .modifier(AuthTextField(isValid: $viewModel.isEmailValid))
             .keyboardType(.emailAddress)
@@ -71,10 +74,13 @@ struct SignInView: View {
                 .opacity(viewModel.isEmailValid ? 0 : 1)
             
             VStack(alignment: .trailing) {
-                SecureField("Password", text: $viewModel.password)
-                    .modifier(AuthTextField(isValid: .constant(true)))
-                    .keyboardType(.default)
-                    .textContentType(.password)
+                SecureField(text: $viewModel.password) {
+                    Text("Password")
+                        .foregroundStyle(Color.gray)
+                }
+                .modifier(AuthTextField(isValid: .constant(true)))
+                .keyboardType(.default)
+                .textContentType(.password)
                 
                 Button {
                     isForgotPassword.toggle()
@@ -97,6 +103,7 @@ struct SignInView: View {
             
             HStack(spacing: 1) {
                 Text("Don't have an account? ")
+                    .foregroundStyle(Color.black)
                 
                 NavigationLink("Sign Up", value: RoutingPaths.SignUpView)
             }
@@ -104,6 +111,7 @@ struct SignInView: View {
             
             VStack(alignment: .center) {
                 Text("Or")
+                    .foregroundStyle(Color.black)
                 
                 GoogleSignInButton(style: .wide) {
                     viewModel.signInWithGoogle()

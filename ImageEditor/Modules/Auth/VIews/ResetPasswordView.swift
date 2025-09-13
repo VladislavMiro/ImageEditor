@@ -15,13 +15,17 @@ struct ResetPasswordView: View {
     var body: some View {
         VStack {
             Text("Enter your email to reset password.")
+                .foregroundStyle(Color.black)
                 .padding(.vertical, 80)
             
             VStack(alignment: .leading) {
-                TextField("Email", text: $viewModel.email)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                    .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
+                TextField(text: $viewModel.email) {
+                    Text("Email")
+                        .foregroundStyle(Color.gray)
+                }
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .modifier(AuthTextField(isValid: $viewModel.isValidEmail))
                     
                 Text("Email is not valid")
                     .foregroundStyle(Color.red)
@@ -44,6 +48,8 @@ struct ResetPasswordView: View {
             .padding(.horizontal, 20)
             Spacer()
         }
+        .background(Color.white)
+        .ignoresSafeArea(.keyboard)
         .alert("Password reset", isPresented: $viewModel.isPassworReset, actions: {
             Button("OK") {
                 dismiss()

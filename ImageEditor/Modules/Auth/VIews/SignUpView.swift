@@ -34,6 +34,8 @@ struct SignUpView: View {
             
             Spacer()
         }
+        .ignoresSafeArea(.keyboard)
+        .background(Color.white)
         .alert("Error", isPresented: $viewModel.isError, actions: {
             Button("OK") { }
         }, message: {
@@ -49,20 +51,26 @@ struct SignUpView: View {
     
     private var textFields: some View {
         VStack(alignment: .leading) {
-            TextField("Email", text: $viewModel.email)
-                .modifier(AuthTextField(isValid: $viewModel.isEmailValid))
-                .keyboardType(.emailAddress)
-                .textContentType(.emailAddress)
+            TextField(text: $viewModel.email) {
+                Text("Email")
+                    .foregroundStyle(Color.gray)
+            }
+            .modifier(AuthTextField(isValid: $viewModel.isEmailValid))
+            .keyboardType(.emailAddress)
+            .textContentType(.emailAddress)
 
             Text("Email is not valid")
                 .foregroundStyle(Color.red)
                 .padding(.leading, 16)
                 .opacity(viewModel.isEmailValid ? 0 : 1)
             
-            SecureField("Password", text: $viewModel.password)
-                .modifier(AuthTextField(isValid: $viewModel.isPasswordValid))
-                .keyboardType(.default)
-                .textContentType(.newPassword)
+            SecureField(text: $viewModel.password) {
+                Text("Password")
+                    .foregroundStyle(Color.gray)
+            }
+            .modifier(AuthTextField(isValid: $viewModel.isPasswordValid))
+            .keyboardType(.default)
+            .textContentType(.newPassword)
             
             Text("Minimum 8 characters at least 1 Alphabet and 1 Number")
                 .multilineTextAlignment(.leading)
