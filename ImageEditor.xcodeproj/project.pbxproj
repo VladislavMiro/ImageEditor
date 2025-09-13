@@ -7,13 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31B530D2E72E45000559575 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B530C2E72E45000559575 /* PhotoButton.swift */; };
+		D31B530F2E7304F600559575 /* ImageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B530E2E7304F600559575 /* ImageEditorViewModel.swift */; };
+		D31B53112E730AAD00559575 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B53102E730AAD00559575 /* Filters.swift */; };
+		D31B53132E730FA300559575 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B53122E730FA300559575 /* FiltersList.swift */; };
+		D31B53152E73101A00559575 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B53142E73101A00559575 /* FilterCell.swift */; };
+		D31B53172E7323D500559575 /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B53162E7323D500559575 /* FilterFactory.swift */; };
+		D31B53192E733BD700559575 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B53182E733BD700559575 /* CameraView.swift */; };
+		D31B531B2E733CD100559575 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B531A2E733CD100559575 /* DrawView.swift */; };
+		D328B2FB2E74913800444319 /* ImageEditorFooterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328B2FA2E74913800444319 /* ImageEditorFooterButton.swift */; };
+		D328B2FD2E74944500444319 /* ImageEditorFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328B2FC2E74944500444319 /* ImageEditorFooter.swift */; };
+		D328B2FF2E74AD2200444319 /* FontsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328B2FE2E74AD2200444319 /* FontsView.swift */; };
 		D32F875C2E72BF04006EE811 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */; };
 		D32F875E2E72C12C006EE811 /* CredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F875D2E72C12C006EE811 /* CredentialsValidator.swift */; };
 		D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87602E72C14B006EE811 /* CredentialsValidatorProtocol.swift */; };
 		D32F87632E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87622E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift */; };
 		D32F87652E72D0BA006EE811 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87642E72D0BA006EE811 /* SignUpViewModel.swift */; };
 		D32F87672E72D37B006EE811 /* SignUpViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F87662E72D37B006EE811 /* SignUpViewModelProtocol.swift */; };
-		D36EBD582E7194440067D599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD552E7194440067D599 /* ContentView.swift */; };
+		D36EBD582E7194440067D599 /* ImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD552E7194440067D599 /* ImageEditorView.swift */; };
 		D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD562E7194440067D599 /* ImageEditorApp.swift */; };
 		D36EBD5A2E7194440067D599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36EBD542E7194440067D599 /* Assets.xcassets */; };
 		D36EBD5C2E7195120067D599 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36EBD5B2E7195120067D599 /* GoogleService-Info.plist */; };
@@ -29,9 +40,22 @@
 		D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */; };
 		D36EBD7F2E71E0570067D599 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD7E2E71E0570067D599 /* GoogleSignIn */; };
 		D36EBD812E71E0570067D599 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D36EBD802E71E0570067D599 /* GoogleSignInSwift */; };
+		D3C5251F2E75BD630091BDAB /* FilterFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C5251E2E75BD630091BDAB /* FilterFactoryProtocol.swift */; };
+		D3C525222E75D9580091BDAB /* UserText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C525212E75D9580091BDAB /* UserText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D31B530C2E72E45000559575 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
+		D31B530E2E7304F600559575 /* ImageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewModel.swift; sourceTree = "<group>"; };
+		D31B53102E730AAD00559575 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		D31B53122E730FA300559575 /* FiltersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
+		D31B53142E73101A00559575 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		D31B53162E7323D500559575 /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
+		D31B53182E733BD700559575 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		D31B531A2E733CD100559575 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		D328B2FA2E74913800444319 /* ImageEditorFooterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorFooterButton.swift; sourceTree = "<group>"; };
+		D328B2FC2E74944500444319 /* ImageEditorFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorFooter.swift; sourceTree = "<group>"; };
+		D328B2FE2E74AD2200444319 /* FontsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		D32F875B2E72BF04006EE811 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		D32F875D2E72C12C006EE811 /* CredentialsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsValidator.swift; sourceTree = "<group>"; };
 		D32F87602E72C14B006EE811 /* CredentialsValidatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsValidatorProtocol.swift; sourceTree = "<group>"; };
@@ -40,7 +64,7 @@
 		D32F87662E72D37B006EE811 /* SignUpViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelProtocol.swift; sourceTree = "<group>"; };
 		D36EBD462E71943A0067D599 /* ImageEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36EBD542E7194440067D599 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D36EBD552E7194440067D599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D36EBD552E7194440067D599 /* ImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorView.swift; sourceTree = "<group>"; };
 		D36EBD562E7194440067D599 /* ImageEditorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorApp.swift; sourceTree = "<group>"; };
 		D36EBD5B2E7195120067D599 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D36EBD652E71968B0067D599 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +76,8 @@
 		D36EBD792E71B4BC0067D599 /* SignInViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelProtocol.swift; sourceTree = "<group>"; };
 		D36EBD7B2E71D2520067D599 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D36EBD822E71E1460067D599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D3C5251E2E75BD630091BDAB /* FilterFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactoryProtocol.swift; sourceTree = "<group>"; };
+		D3C525212E75D9580091BDAB /* UserText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +95,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D31B53062E72E0FC00559575 /* ImageEditorView */ = {
+			isa = PBXGroup;
+			children = (
+				D31B53092E72E12100559575 /* Models */,
+				D31B53082E72E10A00559575 /* ViewModule */,
+				D31B53072E72E10300559575 /* Views */,
+			);
+			path = ImageEditorView;
+			sourceTree = "<group>";
+		};
+		D31B53072E72E10300559575 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D31B530B2E72E40F00559575 /* UI elements */,
+				D36EBD552E7194440067D599 /* ImageEditorView.swift */,
+				D31B531A2E733CD100559575 /* DrawView.swift */,
+				D31B53182E733BD700559575 /* CameraView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D31B53082E72E10A00559575 /* ViewModule */ = {
+			isa = PBXGroup;
+			children = (
+				D31B530A2E72E12600559575 /* Protocols */,
+				D31B530E2E7304F600559575 /* ImageEditorViewModel.swift */,
+			);
+			path = ViewModule;
+			sourceTree = "<group>";
+		};
+		D31B53092E72E12100559575 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3C525202E75BD7B0091BDAB /* Protocols */,
+				D31B53102E730AAD00559575 /* Filters.swift */,
+				D31B53162E7323D500559575 /* FilterFactory.swift */,
+				D3C525212E75D9580091BDAB /* UserText.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D31B530A2E72E12600559575 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D31B530B2E72E40F00559575 /* UI elements */ = {
+			isa = PBXGroup;
+			children = (
+				D31B530C2E72E45000559575 /* PhotoButton.swift */,
+				D328B2FA2E74913800444319 /* ImageEditorFooterButton.swift */,
+				D31B53142E73101A00559575 /* FilterCell.swift */,
+				D31B53122E730FA300559575 /* FiltersList.swift */,
+				D328B2FE2E74AD2200444319 /* FontsView.swift */,
+				D328B2FC2E74944500444319 /* ImageEditorFooter.swift */,
+			);
+			path = "UI elements";
+			sourceTree = "<group>";
+		};
 		D32F875F2E72C135006EE811 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +187,6 @@
 				D36EBD562E7194440067D599 /* ImageEditorApp.swift */,
 				D36EBD5F2E71952B0067D599 /* Modules */,
 				D36EBD5D2E71951A0067D599 /* Core */,
-				D36EBD552E7194440067D599 /* ContentView.swift */,
 			);
 			path = ImageEditor;
 			sourceTree = "<group>";
@@ -126,6 +212,7 @@
 		D36EBD5F2E71952B0067D599 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D31B53062E72E0FC00559575 /* ImageEditorView */,
 				D36EBD672E71991E0067D599 /* Auth */,
 			);
 			path = Modules;
@@ -189,6 +276,14 @@
 				D36EBD712E71A4000067D599 /* AuthTextField.swift */,
 			);
 			path = "UI elements";
+			sourceTree = "<group>";
+		};
+		D3C525202E75BD7B0091BDAB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D3C5251E2E75BD630091BDAB /* FilterFactoryProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,21 +367,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D328B2FD2E74944500444319 /* ImageEditorFooter.swift in Sources */,
 				D36EBD662E71968B0067D599 /* AppDelegate.swift in Sources */,
 				D36EBD702E719EF40067D599 /* AuthButton.swift in Sources */,
-				D36EBD582E7194440067D599 /* ContentView.swift in Sources */,
+				D31B531B2E733CD100559575 /* DrawView.swift in Sources */,
+				D36EBD582E7194440067D599 /* ImageEditorView.swift in Sources */,
 				D36EBD742E71A8620067D599 /* SignUpView.swift in Sources */,
+				D328B2FB2E74913800444319 /* ImageEditorFooterButton.swift in Sources */,
 				D36EBD722E71A4000067D599 /* AuthTextField.swift in Sources */,
+				D31B53132E730FA300559575 /* FiltersList.swift in Sources */,
 				D36EBD6D2E7199660067D599 /* SignInView.swift in Sources */,
+				D31B53152E73101A00559575 /* FilterCell.swift in Sources */,
 				D36EBD7C2E71D2520067D599 /* ResetPasswordView.swift in Sources */,
 				D32F87652E72D0BA006EE811 /* SignUpViewModel.swift in Sources */,
 				D32F87632E72CD09006EE811 /* ResetPasswordViewModelProtocol.swift in Sources */,
+				D31B53112E730AAD00559575 /* Filters.swift in Sources */,
 				D32F875C2E72BF04006EE811 /* ResetPasswordViewModel.swift in Sources */,
+				D328B2FF2E74AD2200444319 /* FontsView.swift in Sources */,
+				D31B53172E7323D500559575 /* FilterFactory.swift in Sources */,
+				D31B530D2E72E45000559575 /* PhotoButton.swift in Sources */,
 				D36EBD592E7194440067D599 /* ImageEditorApp.swift in Sources */,
 				D32F875E2E72C12C006EE811 /* CredentialsValidator.swift in Sources */,
 				D32F87672E72D37B006EE811 /* SignUpViewModelProtocol.swift in Sources */,
+				D31B53192E733BD700559575 /* CameraView.swift in Sources */,
 				D32F87612E72C14B006EE811 /* CredentialsValidatorProtocol.swift in Sources */,
+				D31B530F2E7304F600559575 /* ImageEditorViewModel.swift in Sources */,
+				D3C525222E75D9580091BDAB /* UserText.swift in Sources */,
 				D36EBD7A2E71B4BC0067D599 /* SignInViewModelProtocol.swift in Sources */,
+				D3C5251F2E75BD630091BDAB /* FilterFactoryProtocol.swift in Sources */,
 				D36EBD782E71B4AD0067D599 /* SignInViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,9 +536,12 @@
 				INFOPLIST_FILE = ImageEditor/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Image Editor";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access to your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -464,9 +575,12 @@
 				INFOPLIST_FILE = ImageEditor/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Image Editor";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access to your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;

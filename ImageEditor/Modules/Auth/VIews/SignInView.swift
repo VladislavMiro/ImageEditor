@@ -51,7 +51,7 @@ struct SignInView: View {
                 ResetPasswordView()
                     .presentationDragIndicator(.visible)
             }.fullScreenCover(isPresented: $viewModel.isSignedIn) {
-                ContentView()
+                ImageEditorView()
             }
         }
     }
