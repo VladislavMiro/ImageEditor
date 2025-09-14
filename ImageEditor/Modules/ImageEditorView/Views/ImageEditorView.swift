@@ -18,12 +18,15 @@ struct ImageEditorView: View {
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
     @State private var zoomScale: CGFloat = 0.0
+    @State private var rotation: Angle = .zero
+    @State private var lastRotaion: Angle = .zero
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
     @State private var canvas = PKCanvasView()
     @State private var selectedTab: ImageEditorFooter.ButtonType = .none
     @State private var isDoneButton: Bool = false
     @State private var isSaveButton: Bool = false
+  
     
     @FocusState private var focusState: Bool
     
@@ -39,12 +42,14 @@ struct ImageEditorView: View {
                                  canvasView: $canvas)
                     }
                     .overlay {
-                        textfieldForImage
+                        if !viewModel.texts.isEmpty {
+                            textfieldForImage
+                        }
                     }
                     .scaleEffect(scale)
                     .offset(offset)
+                    .rotationEffect(rotation)
                     .animation(.easeInOut, value: scale)
-                    .animation(.easeInOut, value: offset)
                 
                 VStack {
                     Spacer()
@@ -92,6 +97,9 @@ struct ImageEditorView: View {
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .ignoresSafeArea(.keyboard)
+            .animation(.easeInOut, value: scale)
+            .animation(.easeInOut, value: rotation)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: lastOffset)
         }
         .onChange(of: selectedTab) { selectedTab in
             selectedTabDidChanged(selectedTab)
@@ -100,8 +108,9 @@ struct ImageEditorView: View {
     
     private var saveView: some View {
         VStack(alignment: .center) {
-            let preview = SharePreview("Check my image", image: Image(uiImage: viewModel.renderedImage))
-            let data = SharedImage(image: viewModel.renderedImage)
+            let data = SharedImage(image: viewModel.renderImage(drawing: canvas.drawing))
+            
+            let preview = SharePreview("Check my image", image: data.image)
             
             Group {
                 Divider()
@@ -150,8 +159,15 @@ struct ImageEditorView: View {
             }).onEnded({ state in
                 lastScale = 1.0
             })
-            .simultaneously(with:
-                                DragGesture()
+            .simultaneously(with: RotationGesture()
+                .onChanged { val in
+                    rotation = lastRotaion + val
+                }
+                .onEnded { _ in
+                    lastRotaion = rotation
+                }
+            )
+            .simultaneously(with: DragGesture()
                 .onChanged({ value in
                     let newOffset = CGSize(
                         width: lastOffset.width + value.translation.width,
@@ -178,21 +194,18 @@ struct ImageEditorView: View {
                     item.isEditing = false
                     selectedTab = .none
                 })
-                .tag(item.id)
+                .id(item.id)
                 .fixedSize(horizontal: true, vertical: false)
                 .border(Color(uiColor: item.color),
                         width: item.isEditing ? 1 : 0)
                 .font(.custom(item.font, size: CGFloat(item.size)))
                 .foregroundStyle(Color(uiColor: item.color))
                 .focused($focusState)
-                .onTapGesture {
-                    item.isEditing = true
-                    selectedTab = .text
-                }
                 .overlay  {
                     GeometryReader { geo in
                         Button {
                             focusState = false
+                            viewModel.clearTextIsEditingStates()
                             viewModel.removeText(with: item.id)
                         }
                         label: {
@@ -206,7 +219,9 @@ struct ImageEditorView: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            item.position = value.location
+                            if !viewModel.texts.isEmpty {
+                                item.position = value.location
+                            }
                         }
                 )
             }

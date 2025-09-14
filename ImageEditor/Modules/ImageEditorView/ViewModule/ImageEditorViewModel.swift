@@ -13,10 +13,8 @@ final class ImageEditorViewModel: ObservableObject {
     
     @Published var image: UIImage
     @Published var texts: [UserText] = []
-    @Published var renderedImage: UIImage
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
-    @Published var isRendering: Bool = false
     
     private let filterFactory: FilterFactoryProtocol = FilterFactory()
     
@@ -26,7 +24,6 @@ final class ImageEditorViewModel: ObservableObject {
     init(image: UIImage) {
         self.image = image
         self.originalImage = image
-        self.renderedImage = image
     }
     
 }
@@ -70,16 +67,18 @@ extension ImageEditorViewModel {
     func clearTextIsEditingStates() {
         guard let index = texts.firstIndex(where: { $0.isEditing }) else { return }
         
-        var item = texts[index]
-        
-        item.isEditing = false
-        
-        texts.remove(at: index)
-        texts.insert(item, at: index)
+        texts[index].isEditing = false
     }
     
     func removeText(with id: UUID) {
-        texts.removeAll { $0.id == id }
+        guard !texts.isEmpty else { return }
+        guard let index = texts.firstIndex(where: { $0.id == id }) else { return }
+        
+        Task(priority: .userInitiated) {
+            await MainActor.run {
+                texts.remove(at: index)
+            }
+        }
     }
     
     func changeTextParameters(font: String? = nil, size: CGFloat? = nil, color: UIColor? = nil) {
@@ -136,8 +135,6 @@ extension ImageEditorViewModel {
             
             
             drawing.draw(in: CGRect(origin: .zero, size: image.size))
-            
-            isRendering = false
         }
         
         return combineImage
