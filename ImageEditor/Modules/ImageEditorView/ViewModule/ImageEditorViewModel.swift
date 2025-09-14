@@ -7,18 +7,26 @@
 
 import Foundation
 import PencilKit
+import Photos
 
 final class ImageEditorViewModel: ObservableObject {
     
-    @Published var image: UIImage?
+    @Published var image: UIImage
     @Published var texts: [UserText] = []
+    @Published var renderedImage: UIImage
+    @Published var isError: Bool = false
+    @Published var errorMessage: String = ""
+    @Published var isRendering: Bool = false
     
     private let filterFactory: FilterFactoryProtocol = FilterFactory()
     
-    var originalImage: UIImage?
+    private var originalImage: UIImage
     
-    init(image: UIImage? = nil, originalImage: UIImage? = nil) {
+    
+    init(image: UIImage) {
         self.image = image
+        self.originalImage = image
+        self.renderedImage = image
     }
     
 }
@@ -29,26 +37,29 @@ final class ImageEditorViewModel: ObservableObject {
 extension ImageEditorViewModel {
     
     func addFilter(of type: Filters) {
-        guard let image = self.originalImage else { return }
+        let image = originalImage
+        var filteredImage: UIImage?
         
         switch type {
         case .Original:
-            self.image = originalImage
+            filteredImage = originalImage
         case .BlackAndWhite:
-            let image = filterFactory.createBlaclAndWhiteFilter(for: image)
-            self.image = image
+            filteredImage = filterFactory.createBlaclAndWhiteFilter(for: image)
         case .Sepia:
-            let image = filterFactory.createSepiaFilter(for: image)
-            self.image = image
+            filteredImage = filterFactory.createSepiaFilter(for: image)
         case .Blur:
-            let image = filterFactory.createBlurFilter(for: image)
-            self.image = image
+            filteredImage = filterFactory.createBlurFilter(for: image)
         case .Negative:
-            let image = filterFactory.createNegativeFilter(for: image)
-            self.image = image
+            filteredImage = filterFactory.createNegativeFilter(for: image)
         case .Vintage:
-            let image = filterFactory.createVintageFilter(for: image)
-            self.image = image
+            filteredImage = filterFactory.createVintageFilter(for: image)
+        }
+        
+        if let filteredImage = filteredImage {
+            self.image = filteredImage
+        } else {
+            errorMessage = "Filtering error."
+            isError = true
         }
     }
     
@@ -85,25 +96,30 @@ extension ImageEditorViewModel {
     }
     
     func save(drawing: PKDrawing) {
-        DispatchQueue.main.async {
-            guard let image = self.renderImage(drawing: drawing) else { return }
+        let image = self.renderImage(drawing: drawing)
+        
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetCreationRequest.forAsset()
             
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            if let data = image.jpegData(compressionQuality: 0.9) {
+                request.addResource(with: .photo, data: data, options: nil)
+            } else {
+                DispatchQueue.main.async {
+                    self.errorMessage = "Save not completed. Unsoecified error."
+                    self.isError = true
+                }
+            }
+        } completionHandler: { _, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                    self.isError = true
+                }
+            }
         }
-
     }
     
-    
-    
-}
-
-//MARK: - Extension with private methods
-
-private extension ImageEditorViewModel {
-    
-    func renderImage(drawing: PKDrawing) -> UIImage? {
-        guard let image = image else { return nil }
-        
+    func renderImage(drawing: PKDrawing) -> UIImage {
         let fmt = UIGraphicsImageRendererFormat()
 
         fmt.scale = 1.0
@@ -116,17 +132,23 @@ private extension ImageEditorViewModel {
             
             image.draw(in: CGRect(origin: .zero, size: image.size))
             
-            
             drawText()
             
             
             drawing.draw(in: CGRect(origin: .zero, size: image.size))
             
-            
+            isRendering = false
         }
         
         return combineImage
     }
+    
+    
+}
+
+//MARK: - Extension with private methods
+
+private extension ImageEditorViewModel {
     
     func drawText() {
         self.texts.forEach { text in

@@ -85,9 +85,12 @@ struct MainView: View {
             Text(viewModel.errorMessage)
         })
         .fullScreenCover(isPresented: $isImageEditorOpened) {
-            ImageEditorView()
-                .environmentObject(ImageEditorViewModel(image: viewModel.selectedImage,
-                                                        originalImage: viewModel.selectedImage))
+            if let image = viewModel.selectedImage {
+                ImageEditorView()
+                    .environmentObject(
+                        ImageEditorViewModel(image: image)
+                    )
+            }
         }
         .fullScreenCover(isPresented: $isCameraOpened) {
             CameraView(isPresent: $isCameraOpened, image: $viewModel.selectedImage)

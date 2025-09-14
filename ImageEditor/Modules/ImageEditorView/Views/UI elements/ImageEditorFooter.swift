@@ -87,5 +87,5 @@ extension ImageEditorFooter {
 
 #Preview {
     ImageEditorFooter(selectedTab: .constant(.none))
-        .environmentObject(ImageEditorViewModel())
+        .environmentObject(ImageEditorViewModel(image: .init()))
 }

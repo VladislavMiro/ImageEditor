@@ -23,20 +23,20 @@ struct ImageEditorView: View {
     @State private var canvas = PKCanvasView()
     @State private var selectedTab: ImageEditorFooter.ButtonType = .none
     @State private var isDoneButton: Bool = false
+    @State private var isSaveButton: Bool = false
     
     @FocusState private var focusState: Bool
     
     var body: some View {
         NavigationStack {
             ZStack(alignment: .center) {
-                Image(uiImage: viewModel.image ?? UIImage())
+                Image(uiImage: viewModel.image)
                     .resizable()
                     .scaledToFit()
                     .gesture(imageGesture)
                     .overlay {
                         DrawView(selectedTab: $selectedTab,
-                                 canvasView: $canvas,
-                                 image: $viewModel.image)
+                                 canvasView: $canvas)
                     }
                     .overlay {
                         textfieldForImage
@@ -52,6 +52,14 @@ struct ImageEditorView: View {
                     ImageEditorFooter(selectedTab: $selectedTab)
                         .environmentObject(viewModel)
                 }
+            }
+            .sheet(isPresented: $isSaveButton) {
+                saveView
+            }
+            .alert("Error", isPresented: $viewModel.isError) {
+                Button("OK") {}
+            } message: {
+                Text(viewModel.errorMessage)
             }
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
@@ -88,6 +96,45 @@ struct ImageEditorView: View {
         .onChange(of: selectedTab) { selectedTab in
             selectedTabDidChanged(selectedTab)
         }
+    }
+    
+    private var saveView: some View {
+        VStack(alignment: .center) {
+            let preview = SharePreview("Check my image", image: Image(uiImage: viewModel.renderedImage))
+            let data = SharedImage(image: viewModel.renderedImage)
+            
+            Group {
+                Divider()
+                
+                ShareLink(item: data, preview: preview) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                        Text("Share")
+                    }
+                    .foregroundStyle(Color.white)
+                }
+                
+                Divider()
+                
+                Button("Save to Photos") {
+                    viewModel.save(drawing: canvas.drawing)
+                    isSaveButton.toggle()
+                }
+                
+                Divider()
+                
+                Button("Cancel") {
+                    isSaveButton.toggle()
+                }
+                
+                Divider()
+            }
+            .frame(height: 30)
+            .foregroundStyle(.white)
+            
+        }
+        .ignoresSafeArea()
+        .presentationDetents([.height(250)])
     }
     
     private var imageGesture: some Gesture {
@@ -165,7 +212,6 @@ struct ImageEditorView: View {
             }
         }
     }
-    
 }
 
 //MARK: - Extension with private methods
@@ -181,7 +227,7 @@ private extension ImageEditorView {
             focusState = false
             selectedTab = .none
         default:
-            viewModel.save(drawing: canvas.drawing)
+            isSaveButton = true
         }
     }
     

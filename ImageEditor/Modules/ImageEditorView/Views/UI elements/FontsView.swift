@@ -117,5 +117,5 @@ private extension FontsView {
 
 #Preview {
     FontsView()
-        .environmentObject(ImageEditorViewModel())
+        .environmentObject(ImageEditorViewModel(image: .init()))
 }

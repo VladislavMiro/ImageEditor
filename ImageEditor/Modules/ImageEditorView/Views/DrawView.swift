@@ -13,7 +13,6 @@ struct DrawView: UIViewRepresentable {
     
     @Binding var selectedTab: ImageEditorFooter.ButtonType
     @Binding var canvasView: PKCanvasView
-    @Binding var image: UIImage?
     
     private let toolPicker = PKToolPicker()
     private let imageView = UIImageView()
