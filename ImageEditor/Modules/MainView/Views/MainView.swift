@@ -48,8 +48,16 @@ struct MainView: View {
                     }
                                              .background(Color.black)
                 }
-                .navigationTitle("Library")
+                .background(Color.black)
+                .toolbarBackground(.lightBlack, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar(content: {
+                    ToolbarItem(placement: .principal) {
+                                    Text("Library")
+                                        .foregroundColor(.white)
+                                }
+                    
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
                             viewModel.signOut()
@@ -71,9 +79,6 @@ struct MainView: View {
                         }
                     }
                 })
-                .toolbarBackground(.lightBlack, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     viewModel.fetchPhotos()
                 }
