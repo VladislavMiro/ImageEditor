@@ -12,18 +12,16 @@ import UIKit
 struct DrawView: UIViewRepresentable {
     
     @Binding var selectedTab: ImageEditorFooter.ButtonType
-    @Binding var drawing: PKDrawing
-    private let toolPicker = PKToolPicker()
-    private let imageView = UIImageView()
-    @Binding var scale: CGFloat
     @Binding var canvasView: PKCanvasView
     @Binding var image: UIImage?
+    
+    private let toolPicker = PKToolPicker()
+    private let imageView = UIImageView()
     
     func makeUIView(context: Context) -> PKCanvasView {
         canvasView.isOpaque = false
         canvasView.drawingPolicy = .anyInput
-        canvasView.delegate = context.coordinator
-        canvasView.drawing = drawing
+        canvasView.drawing = PKDrawing()
         
         return canvasView
     }
@@ -43,28 +41,6 @@ struct DrawView: UIViewRepresentable {
         }
     }
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(canvas: self)
-    }
-    
     typealias UIViewType = PKCanvasView
 
-}
-
-//MARK: - Extension with subobjects
-
-extension DrawView  {
-    
-    final class Coordinator: NSObject, PKCanvasViewDelegate {
-        private var canvas: DrawView
-        
-        init(canvas: DrawView) {
-            self.canvas = canvas
-        }
-        
-        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-            canvas.drawing = canvasView.drawing
-        }
-    }
-    
 }

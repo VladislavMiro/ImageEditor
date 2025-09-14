@@ -34,7 +34,7 @@ struct FontsView: View {
                     }
                     .padding(.bottom, 10)
                     
-                    Stepper("Font Size:     \(selectedSize)",
+                    Stepper("Font Size:     \(Int(selectedSize))",
                             value: $selectedSize, in: 0...128, step: 1)
                         .foregroundStyle(.white)
 

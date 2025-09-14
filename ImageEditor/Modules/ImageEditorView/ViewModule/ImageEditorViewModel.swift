@@ -84,9 +84,9 @@ extension ImageEditorViewModel {
         texts.insert(item, at: index)
     }
     
-    func save(drawing: PKDrawing, canvasWidth: CGFloat) {
+    func save(drawing: PKDrawing) {
         DispatchQueue.main.async {
-            guard let image = self.renderImage(drawing: drawing, canvasWidth: canvasWidth) else { return }
+            guard let image = self.renderImage(drawing: drawing) else { return }
             
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
@@ -101,7 +101,7 @@ extension ImageEditorViewModel {
 
 private extension ImageEditorViewModel {
     
-    func renderImage(drawing: PKDrawing, canvasWidth: CGFloat) -> UIImage? {
+    func renderImage(drawing: PKDrawing) -> UIImage? {
         guard let image = image else { return nil }
         
         let fmt = UIGraphicsImageRendererFormat()
@@ -109,8 +109,7 @@ private extension ImageEditorViewModel {
         fmt.scale = 1.0
         
         let renderer = UIGraphicsImageRenderer(size: image.size, format: fmt)
-        
-        let scale = image.size.width / canvasWidth
+    
         let drawing = drawing.image(from: .init(origin: .zero, size: image.size), scale: 1.0)
         
         let combineImage = renderer.image { context in

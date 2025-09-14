@@ -17,111 +17,105 @@ struct ImageEditorView: View {
     
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
-    @State private var drawing = PKDrawing()
-    @State private var imageSize: CGSize = .zero
-    @State private var imageFrame: CGSize = .zero
-    @State private var canvas = PKCanvasView()
+    @State private var zoomScale: CGFloat = 0.0
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
+    @State private var canvas = PKCanvasView()
     @State private var selectedTab: ImageEditorFooter.ButtonType = .none
-    @State private var zoomScale: CGFloat = 0.0
-    @State private var cancelOpacity = 1.0
-    @State private var saveButtonTite: String = "Save"
+    @State private var isDoneButton: Bool = false
     
     @FocusState private var focusState: Bool
     
     var body: some View {
         NavigationStack {
-                imageEditor
+            ZStack(alignment: .center) {
+                Image(uiImage: viewModel.image ?? UIImage())
+                    .resizable()
+                    .scaledToFit()
+                    .gesture(imageGesture)
+                    .overlay {
+                        DrawView(selectedTab: $selectedTab,
+                                 canvasView: $canvas,
+                                 image: $viewModel.image)
+                    }
+                    .overlay {
+                        textfieldForImage
+                    }
+                    .scaleEffect(scale)
+                    .offset(offset)
+                    .animation(.easeInOut, value: scale)
+                    .animation(.easeInOut, value: offset)
+                
+                VStack {
+                    Spacer()
+                    
+                    ImageEditorFooter(selectedTab: $selectedTab)
+                        .environmentObject(viewModel)
+                }
+            }
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
+                            .foregroundColor(.white)
+                    }
+                    .opacity(isDoneButton ? 0 : 1)
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        saveButtonTapped()
+                    } label: {
+                        if isDoneButton {
+                            Text("Done")
+                                .foregroundColor(.white)
+                        } else {
+                            Image(systemName: "externaldrive.fill")
+                                .foregroundStyle(.white)
+                        }
+                    }
+                }
+            })
+            .toolbarBackground(.lightBlack, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .ignoresSafeArea(.keyboard)
         }
         .onChange(of: selectedTab) { selectedTab in
             selectedTabDidChanged(selectedTab)
         }
     }
     
-    private var imageEditor: some View {
-        VStack(alignment: .leading) {
-            GeometryReader { geo in
-                ZStack(alignment: .center) {
-                    Image(uiImage: viewModel.image ?? UIImage())
-                        .resizable()
-                        .scaledToFit()
-                        .gesture(
-                            MagnificationGesture()
-                                .onChanged({ state in
-                                    let delta = state / lastScale
-                                    let newScale = scale * delta
-                                    
-                                    zoomScale = min(max(newScale, 1.0), 5.0)
-                                    scale = zoomScale
-                                    
-                                    lastScale = state
-                                }).onEnded({ state in
-                                    lastScale = 1.0
-                                })
-                                .simultaneously(with: DragGesture()
-                                    .onChanged({ value in
-                                        let newOffset = CGSize(
-                                            width: lastOffset.width + value.translation.width,
-                                            height: lastOffset.height + value.translation.height)
-                                        
-                                        offset = newOffset
-                                    })
-                                        .onEnded({ value in
-                                            lastOffset = offset
-                                        })
-                                )
-                        )
-                        .overlay {
-                            DrawView(selectedTab: $selectedTab,
-                                     drawing: $drawing,
-                                     scale: $scale,
-                                     canvasView: $canvas,
-                                     image: $viewModel.image)
-                            
-                        }
-                        .overlay {
-                            textfieldForImage
-                        }
-                        .scaleEffect(scale)
-                        .offset(offset)
-                        .animation(.easeInOut, value: scale)
-                        .animation(.easeInOut, value: offset)
+    private var imageGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged({ state in
+                let delta = state / lastScale
+                let newScale = scale * delta
+                
+                zoomScale = min(max(newScale, 1.0), 5.0)
+                scale = zoomScale
+                
+                lastScale = state
+            }).onEnded({ state in
+                lastScale = 1.0
+            })
+            .simultaneously(with:
+                                DragGesture()
+                .onChanged({ value in
+                    let newOffset = CGSize(
+                        width: lastOffset.width + value.translation.width,
+                        height: lastOffset.height + value.translation.height)
                     
-                    VStack {
-                        Spacer()
-                        
-                        ImageEditorFooter(selectedTab: $selectedTab)
-                            .environmentObject(viewModel)
-                    }
-                }
-            }
-        }
-        .toolbar(content: {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Cancel")
-                        .foregroundColor(.white)
-                }
-                .opacity(cancelOpacity)
-            }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    saveButtonTapped()
-                } label: {
-                    Text(saveButtonTite)
-                        .foregroundColor(.white)
-                }
-            }
-        })
-        .toolbarBackground(.lightBlack, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .navigationBarTitleDisplayMode(.inline)
-        .frame(maxWidth: .infinity)
-        .background(Color.black)
+                    offset = newOffset
+                })
+                    .onEnded({ value in
+                        lastOffset = offset
+                    })
+            )
     }
     
     private var textfieldForImage: some View {
@@ -172,10 +166,6 @@ struct ImageEditorView: View {
         }
     }
     
-    private var selectPhotoView: some View {
-        return EmptyView()
-    }
-    
 }
 
 //MARK: - Extension with private methods
@@ -191,18 +181,12 @@ private extension ImageEditorView {
             focusState = false
             selectedTab = .none
         default:
-            viewModel.save(drawing: drawing, canvasWidth: canvas.bounds.width)
+            viewModel.save(drawing: canvas.drawing)
         }
     }
     
     func selectedTabDidChanged(_ selectedTab: ImageEditorFooter.ButtonType) {
-        if selectedTab == .draw || selectedTab == .text {
-            cancelOpacity = 0
-            saveButtonTite = "Done"
-        } else {
-            cancelOpacity = 1
-            saveButtonTite = "Save"
-        }
+        isDoneButton = selectedTab == .draw || selectedTab == .text
     }
     
 }
