@@ -37,6 +37,7 @@ struct ImageEditorView: View {
                     .resizable()
                     .scaledToFit()
                     .gesture(imageGesture)
+                    .scaleEffect(scale)
                     .overlay {
                         DrawView(selectedTab: $selectedTab,
                                  canvasView: $canvas)
@@ -46,7 +47,6 @@ struct ImageEditorView: View {
                             textfieldForImage
                         }
                     }
-                    .scaleEffect(scale)
                     .offset(offset)
                     .rotationEffect(rotation)
                     .animation(.easeInOut, value: scale)
@@ -108,7 +108,9 @@ struct ImageEditorView: View {
     
     private var saveView: some View {
         VStack(alignment: .center) {
-            let data = SharedImage(image: viewModel.renderImage(drawing: canvas.drawing))
+            
+            let size = canvas.bounds.size
+            let data = SharedImage(image: viewModel.renderImage(drawing: canvas.drawing, canvasSize: size))
             
             let preview = SharePreview("Check my image", image: data.image)
             
@@ -126,7 +128,7 @@ struct ImageEditorView: View {
                 Divider()
                 
                 Button("Save to Photos") {
-                    viewModel.save(drawing: canvas.drawing)
+                    viewModel.save(drawing: canvas.drawing, canvasSizie: size)
                     isSaveButton.toggle()
                 }
                 
@@ -169,16 +171,20 @@ struct ImageEditorView: View {
             )
             .simultaneously(with: DragGesture()
                 .onChanged({ value in
-                    let newOffset = CGSize(
-                        width: lastOffset.width + value.translation.width,
-                        height: lastOffset.height + value.translation.height)
-                    
-                    offset = newOffset
+                    if scale != 1 {
+                        let newOffset = CGSize(
+                            width: lastOffset.width + value.translation.width,
+                            height: lastOffset.height + value.translation.height)
+                        offset = newOffset
+                    }
                 })
                     .onEnded({ value in
-                        lastOffset = offset
+                        if scale != 1 {
+                            lastOffset = offset
+                        }
                     })
             )
+
     }
     
     private var textfieldForImage: some View {
@@ -219,9 +225,7 @@ struct ImageEditorView: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            if !viewModel.texts.isEmpty {
-                                item.position = value.location
-                            }
+                            item.position = value.location
                         }
                 )
             }
