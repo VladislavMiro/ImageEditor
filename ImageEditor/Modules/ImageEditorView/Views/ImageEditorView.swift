@@ -26,7 +26,8 @@ struct ImageEditorView: View {
     @State private var selectedTab: ImageEditorFooter.ButtonType = .none
     @State private var isDoneButton: Bool = false
     @State private var isSaveButton: Bool = false
-  
+    @State private var isRendering: Bool = false
+    
     
     @FocusState private var focusState: Bool
     
@@ -81,12 +82,17 @@ struct ImageEditorView: View {
                     Button {
                         saveButtonTapped()
                     } label: {
-                        if isDoneButton {
-                            Text("Done")
-                                .foregroundColor(.white)
+                        if isRendering {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
-                            Image(systemName: "externaldrive.fill")
-                                .foregroundStyle(.white)
+                            if isDoneButton {
+                                Text("Done")
+                                    .foregroundColor(.white)
+                            } else {
+                                Image(systemName: "externaldrive.fill")
+                                    .foregroundStyle(.white)
+                            }
                         }
                     }
                 }
@@ -108,10 +114,7 @@ struct ImageEditorView: View {
     
     private var saveView: some View {
         VStack(alignment: .center) {
-            
-            let size = canvas.bounds.size
-            let data = SharedImage(image: viewModel.renderImage(drawing: canvas.drawing, canvasSize: size))
-            
+            let data = SharedImage(image: viewModel.renderedImage)
             let preview = SharePreview("Check my image", image: data.image)
             
             Group {
@@ -128,7 +131,7 @@ struct ImageEditorView: View {
                 Divider()
                 
                 Button("Save to Photos") {
-                    viewModel.save(drawing: canvas.drawing, canvasSizie: size)
+                    viewModel.save()
                     isSaveButton.toggle()
                 }
                 
@@ -184,7 +187,7 @@ struct ImageEditorView: View {
                         }
                     })
             )
-
+        
     }
     
     private var textfieldForImage: some View {
@@ -246,7 +249,16 @@ private extension ImageEditorView {
             focusState = false
             selectedTab = .none
         default:
-            isSaveButton = true
+            isRendering = true
+            
+            Task.detached(priority: .userInitiated) {
+                await viewModel.renderImage(drawing: canvas.drawing, canvasSize: canvas.bounds.size)
+                
+                await MainActor.run {
+                    isRendering = false
+                    isSaveButton = true
+                }
+            }
         }
     }
     

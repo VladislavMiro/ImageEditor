@@ -17,7 +17,7 @@ final class ImageEditorViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     private let filterFactory: FilterFactoryProtocol = FilterFactory()
-    
+    var renderedImage: UIImage = UIImage()
     private var originalImage: UIImage
     
     
@@ -93,32 +93,34 @@ extension ImageEditorViewModel {
         texts.insert(item, at: index)
     }
     
-    func save(drawing: PKDrawing, canvasSizie: CGSize) {
-        let image = renderImage(drawing: drawing, canvasSize: canvasSizie)
-        
+    func save() {
         PHPhotoLibrary.shared().performChanges {
             let request = PHAssetCreationRequest.forAsset()
             
-            if let data = image.jpegData(compressionQuality: 0.9) {
+            if let data = self.renderedImage.jpegData(compressionQuality: 0.9) {
                 request.addResource(with: .photo, data: data, options: nil)
             } else {
-                DispatchQueue.main.async {
-                    self.errorMessage = "Save not completed. Unsoecified error."
-                    self.isError = true
+                Task {
+                    await MainActor.run {
+                        self.errorMessage = "Save not completed. Unsoecified error."
+                        self.isError = true
+                    }
                 }
             }
-        } completionHandler: { _, error in
+        } completionHandler: {  _, error in
             
             if let error = error {
-                DispatchQueue.main.async {
-                    self.errorMessage = error.localizedDescription
-                    self.isError = true
+                Task {
+                    await MainActor.run {
+                        self.errorMessage = error.localizedDescription
+                        self.isError = true
+                    }
                 }
             }
         }
     }
     
-    func renderImage(drawing: PKDrawing, canvasSize: CGSize) -> UIImage {
+    func renderImage(drawing: PKDrawing, canvasSize: CGSize) async {
         let effectiveCanvasSize: CGSize = (canvasSize.width > 0 && canvasSize.height > 0) ? canvasSize : image.size
         
         let fmt = UIGraphicsImageRendererFormat()
@@ -127,7 +129,7 @@ extension ImageEditorViewModel {
         
         let renderer = UIGraphicsImageRenderer(size: image.size, format: fmt)
         
-        let drawingImage = drawing.image(from: CGRect(origin: .zero, size: effectiveCanvasSize),
+        let drawingImage = await drawing.image(from: CGRect(origin: .zero, size: effectiveCanvasSize),
                                          scale: UIScreen.main.scale)
         
         let combined = renderer.image { _ in
@@ -138,7 +140,9 @@ extension ImageEditorViewModel {
             drawingImage.draw(in: CGRect(origin: .zero, size: image.size))
         }
         
-        return combined
+        await MainActor.run {
+            renderedImage = combined
+        }
     }
     
     
