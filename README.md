@@ -31,6 +31,15 @@ MVVM разделяет код на три основные компоненты
 
 ![Image alt](Screens/Modules.png)
 
+## Скрииншоты
+
+![Image alt](Screens/0.png)
+![Image alt](Screens/1.png)
+![Image alt](Screens/2.png)
+![Image alt](Screens/3.png)
+![Image alt](Screens/4.png)
+
+
 ## Документация
 
 ### 1) Регистрация 
