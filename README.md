@@ -34,12 +34,10 @@ MVVM разделяет код на три основные компоненты
 ## Скрииншоты
 
 <img src="Screens/0.png" alt="" width="250" height="500"/>
-![Image alt](Screens/0.png) 
-![Image alt](Screens/1.png)
-![Image alt](Screens/2.png)
-![Image alt](Screens/3.png)
-![Image alt](Screens/4.png)
-
+<img src="Screens/1.png" alt="" width="250" height="500"/>
+<img src="Screens/2.png" alt="" width="250" height="500"/>
+<img src="Screens/3.png" alt="" width="250" height="500"/>
+<img src="Screens/4.png" alt="" width="250" height="500"/>
 
 ## Документация
 
@@ -112,6 +110,7 @@ MVVM разделяет код на три основные компоненты
 Что бы сохранить на устройство изображение просто нажмите на иконку диска в правом верхнем углу экрана и в появившемся окне выберите кнопку "Share".
 
 Что бы закрыть появившееся окно, нажмите на кнопку "Cancel".
+
 
 
 
